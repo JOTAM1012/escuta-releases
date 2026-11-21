@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Escuta · baixar o app</title>
+<meta name="description" content="Grava aulas e reuniões, transcreve e resume com IA. Android, grátis.">
+<meta property="og:title" content="Escuta · baixar o app">
+<meta property="og:description" content="Grava aulas e reuniões, transcreve e resume com IA. Android, grátis.">
+<meta property="og:image" content="icon.png">
+<link rel="icon" href="icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#0F1115; --surface:#181B21; --line:#2A2E36; --text:#E6E8EB; --muted:#9AA0A8; --accent:#E6E8EB; --on:#0F1115; }
+  @media (prefers-color-scheme: light) {
+    :root { --bg:#F4F2EE; --surface:#FFFFFF; --line:#E2DED6; --text:#1B1D21; --muted:#6B6F76; --accent:#1B1D21; --on:#FFFFFF; }
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font-family:Manrope, system-ui, sans-serif; line-height:1.5; }
+  main { max-width:480px; margin:0 auto; padding:40px 16px 56px; }
+  .brand { display:flex; align-items:center; gap:14px; }
+  .brand img { width:64px; height:64px; border-radius:16px; }
+  .brand h1 { margin:0; font-size:30px; font-weight:800; letter-spacing:3px; }
+  .lead { color:var(--muted); font-size:17px; margin:18px 0 28px; }
+  .btn { display:flex; align-items:center; justify-content:center; gap:10px; width:100%; padding:18px; border-radius:999px;
+         background:var(--accent); color:var(--on); font-weight:800; font-size:18px; text-decoration:none; }
+  .sub { text-align:center; color:var(--muted); font-size:13px; margin:10px 0 0; }
+  .card { background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:18px 20px; margin-top:28px; }
+  .card h2 { margin:0 0 10px; font-size:16px; }
+  ol { margin:0; padding-left:20px; }
+  li { margin:8px 0; }
+  .small { color:var(--muted); font-size:13px; }
+  a.link { color:var(--text); }
+</style>
+</head>
+<body>
+<main>
+  <div class="brand"><img src="icon.png" alt=""><h1>ESCUTA</h1></div>
+  <p class="lead">Grava aulas, reuniões e conversas, separa as vozes e faz resumos com IA. Grátis, para Android.</p>
+
+  <a class="btn" href="https://github.com/JOTAM1012/escuta-releases/releases/latest/download/Escuta.apk">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg>
+    Baixar o Escuta
+  </a>
+  <p class="sub" id="ver">Versão mais recente</p>
+
+  <div class="card">
+    <h2>Como instalar</h2>
+    <ol>
+      <li>Toque em <b>Baixar o Escuta</b> e espere o download terminar.</li>
+      <li>Abra o arquivo <b>Escuta.apk</b> (na notificação ou em Downloads).</li>
+      <li>Se o Android pedir, toque em <b>Configurações</b> e ative <b>Permitir desta fonte</b>; depois volte e toque em <b>Instalar</b>.</li>
+      <li>Se aparecer um aviso do Play Protect, toque em <b>Mais detalhes → Instalar assim mesmo</b>.</li>
+    </ol>
+    <p class="small">Depois de instalado, o app se atualiza sozinho.</p>
+  </div>
+
+  <div class="card">
+    <h2>Para usar</h2>
+    <p class="small" style="margin:0">O app pede duas chaves gratuitas (Groq e Gemini); as instruções aparecem dentro dele. Celular muito antigo? Use a <a class="link" href="https://github.com/JOTAM1012/escuta-releases/releases/latest/download/Escuta-celular-antigo-32bits.apk">versão 32 bits</a>.</p>
+  </div>
+</main>
+<script>
+  fetch('https://api.github.com/repos/JOTAM1012/escuta-releases/releases/latest')
+    .then(r => r.ok ? r.json() : null)
+    .then(j => {
+      if (!j) return;
+      const a = (j.assets || []).find(x => x.name === 'Escuta.apk');
+      const mb = a ? ' · ' + Math.round(a.size / 1048576) + ' MB' : '';
+      document.getElementById('ver').textContent = 'Versão ' + j.tag_name.replace(/^v/, '') + mb;
+    })
+    .catch(() => {});
+</script>
+</body>
+</html>
